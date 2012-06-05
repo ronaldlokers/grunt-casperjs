@@ -1,0 +1,36 @@
+{
+  "name": "grunt-casperjs",
+  "description": "With this grunt.js task you can run tests with CasperJS.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ronaldlokers/grunt-casperjs",
+  "author": {
+    "name": "Ronald Lokers",
+    "email": "ronaldlokers@me.com",
+    "url": "http://ronaldlokers.nl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ronaldlokers/grunt-casperjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ronaldlokers/grunt-casperjs/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ronaldlokers/grunt-casperjs/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "grunt.js",
+  "bin": "bin/grunt-casperjs",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "grunt": ">=0.3.7"
+  },
+  "devDependencies": {
+    "grunt": ">=0.3.7"
+  },
+  "keywords": ["grunt.js", "casperjs"]
+}
