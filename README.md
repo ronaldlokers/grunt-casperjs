@@ -2,7 +2,7 @@
 
 With this grunt.js task you can run tests with CasperJS.
 
-1. [Install Casperjs](http://casperjs.org/installation.html)
+1. [Install CasperJS](http://casperjs.org/installation.html)
 2. Call `grunt.loadNpmTasks('grunt-casperjs')` in your gruntfile.
 3. Add the following to your configuration file:
 
