@@ -31,6 +31,8 @@ module.exports = function( grunt ) {
 
             if ( error !== null ) {
                 callback(error);
+            } else {
+                callback();
             }
         }
 
