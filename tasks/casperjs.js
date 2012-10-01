@@ -5,18 +5,22 @@ module.exports = function( grunt ) {
 
         // Tell grunt this task is asynchronous.
         var done = this.async(),
-            files = grunt.file.expandFiles(this.file.src);
+            files = grunt.file.expandFiles(this.file.src),
+            filepaths = [];
 
         grunt.file.expandFiles(this.file.src).forEach(function(filepath) {
+            filepaths.push(filepath);
+        });
+
+        grunt.utils.async.forEachSeries(filepaths, function runCasper(filepath, callback) {
             grunt.helper('casperjs', filepath, function(err){
                 if (err) {
                     grunt.warn(err);
-                    done(false);
-                } else {
-                    done();
                 }
+                callback();
             });
-        });
+        }, done);
+
     });
 
     grunt.registerHelper('casperjs', function(filepath, callback) {
