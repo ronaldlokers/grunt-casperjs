@@ -1,4 +1,6 @@
 module.exports = function(grunt) {
+  'use strict';
+
   // Create a new multi task.
   grunt.registerMultiTask('casperjs', 'This triggers casperjs.', function() {
     // Tell grunt this task is asynchronous.
