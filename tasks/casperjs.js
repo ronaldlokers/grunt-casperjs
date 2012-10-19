@@ -6,14 +6,20 @@ module.exports = function(grunt) {
     // Tell grunt this task is asynchronous.
     var done = this.async(),
         files = grunt.file.expandFiles(this.file.src),
-        filepaths = [];
+        filepaths = [],
+        helpers = require('grunt-contrib-lib').init(grunt),
+        options = helpers.options(this);
+
+   grunt.verbose.writeflags(options, 'Options');
+        
 
     grunt.file.expandFiles(this.file.src).forEach(function(filepath) {
       filepaths.push(filepath);
     });
 
-   grunt.utils.async.forEachSeries(filepaths, function(filepath, callback) {
-     grunt.helper('casperjs', filepath, function(err) {
+   grunt.utils.async.forEachSeries(
+       filepaths, function(filepath, callback) {
+     grunt.helper('casperjs', filepath, options, function(err) {
        if (err) {
          grunt.warn(err);
        }
@@ -22,9 +28,34 @@ module.exports = function(grunt) {
    }, done);
  });
 
- grunt.registerHelper('casperjs', function(filepath, callback) {
-   var command = 'casperjs "' + filepath + '"',
+ grunt.registerHelper('casperjs', function(filepath, options, callback) {
+   var command = 'casperjs test',
        exec = require('child_process').exec;
+
+   // Add options documented in the following web site:
+   //   http://casperjs.org/testing.html
+   if (options.xunit) {
+     command += ' --xunit=' + options.xunit;
+   }
+   if (options.direct) {
+     command += ' --direct';
+   }
+   if (options.includes) {
+     command += ' --includes=' + options.includes.join(',');
+   }
+   if (options.logLevel) {
+     command += ' --log-level=' + options.logLevel;
+   }
+   if (options.pre) {
+     command += ' --pre=' + options.pre.join(',');
+   }
+   if (options.post) {
+     command += ' --post=' + options.post.join(',');
+   }
+
+   command += " " + filepath;
+
+   grunt.log.write("Command: " + command);
 
    function puts(error, stdout, stderr) {
      grunt.log.write('\nRunning tests from "' + filepath + '":\n');
