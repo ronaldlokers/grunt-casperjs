@@ -21,7 +21,7 @@
       "url": "https://github.com/ronaldlokers/grunt-casperjs/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "grunt.js",
+  "main": "tasks/casperjs.js",
   "bin": "bin/grunt-casperjs",
   "engines": {
     "node": "*"
