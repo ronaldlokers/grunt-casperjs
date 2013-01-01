@@ -27,10 +27,12 @@
     "node": "*"
   },
   "dependencies": {
-    "grunt": ">=0.3.7"
+    "grunt": ">=0.3.7",
+    "grunt-contrib-lib": "~0.3.0"
   },
   "devDependencies": {
-    "grunt": ">=0.3.7"
+    "grunt": ">=0.3.7",
+    "grunt-contrib-lib": "~0.3.0"
   },
   "keywords": ["grunt.js", "gruntplugin", "casperjs"]
 }
