@@ -17,8 +17,11 @@ module.exports = function(grunt) {
     grunt.file.expandFiles(this.file.src).forEach(function(filepath) {
       filepaths.push(filepath);
     });
+    
+    // grunt.utils changed to grunt.util in 0.4.x
+    var async = (grunt.util || grunt.utils).async;
 
-    grunt.util.async.forEachSeries(
+    async.forEachSeries(
       filepaths, function(filepath, callback) {
         casperjs(filepath, options, function(err) {
           if (err) {
