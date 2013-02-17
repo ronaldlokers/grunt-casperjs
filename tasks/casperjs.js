@@ -7,16 +7,24 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('casperjs', 'This triggers casperjs.', function() {
     // Tell grunt this task is asynchronous.
     var done = this.async(),
-        files = grunt.file.expandFiles(this.file.src),
         filepaths = [],
         helpers = require('grunt-contrib-lib').init(grunt),
         options = helpers.options(this);
 
     grunt.verbose.writeflags(options, 'Options');
 
-    grunt.file.expandFiles(this.file.src).forEach(function(filepath) {
-      filepaths.push(filepath);
-    });
+    // grunt 0.3.x
+    if (this.file) {
+      grunt.file.expandFiles(this.file.src).forEach(function(filepath) {
+        filepaths.push(filepath);
+      });
+
+    // grunt 0.4.x
+    } else {
+      this.files.forEach(function(file) {
+        filepaths.push(file.src);
+      });
+    }
     
     // grunt.utils changed to grunt.util in 0.4.x
     var async = (grunt.util || grunt.utils).async;
@@ -29,7 +37,7 @@ module.exports = function(grunt) {
           }
           callback();
         });
-      }, 
+      },
     done);
   });
 };
