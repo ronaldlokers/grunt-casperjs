@@ -1,4 +1,4 @@
-# grunt-casperjs [![Build Status](https://travis-ci.org/ronaldlokers/grunt-casperjs.png?branch=master)](https://travis-ci.org/ronaldlokers/grunt-casperjs)
+# grunt-casperjs
 
 > With this grunt.js task you can run tests with CasperJS.
 
