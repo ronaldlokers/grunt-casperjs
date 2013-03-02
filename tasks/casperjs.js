@@ -1,35 +1,39 @@
+/*
+ * grunt-casperjs
+ * https://github.com/ronaldlokers/grunt-casperjs
+ *
+ * Copyright (c) 2013 Ronald Lokers
+ * Licensed under the MIT license.
+ */
+
+'use strict';
+
 module.exports = function(grunt) {
-  'use strict';
-  
+
   var casperjs = require('./lib/casperjs').init(grunt).casperjs;
 
-  // Create a new multi task.
-  grunt.registerMultiTask('casperjs', 'This triggers casperjs.', function() {
-    // Tell grunt this task is asynchronous.
+  grunt.registerMultiTask('casperjs', 'Run CasperJs tests.', function() {
+    // Merge task-specific and/or target-specific options with these defaults.
     var done = this.async(),
-        filepaths = [],
-        helpers = require('grunt-contrib-lib').init(grunt),
-        options = helpers.options(this);
+        filepaths = [], 
+        options = this.options();
 
-    grunt.verbose.writeflags(options, 'Options');
-
-    // grunt 0.3.x
-    if (this.file) {
-      grunt.file.expandFiles(this.file.src).forEach(function(filepath) {
-        filepaths.push(filepath);
+    // Iterate over all specified file groups.
+    this.files.forEach(function(file) {
+      // Concat specified files.
+      file.src.filter(function(filepath) {
+        // Warn on and remove invalid source files (if nonull was set).
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Source file "' + filepath + '" not found.');
+          return false;
+        } else {
+          filepaths.push(filepath);
+          return true;
+        }
       });
+    });
 
-    // grunt 0.4.x
-    } else {
-      this.files.forEach(function(file) {
-        filepaths.push(file.src);
-      });
-    }
-    
-    // grunt.utils changed to grunt.util in 0.4.x
-    var async = (grunt.util || grunt.utils).async;
-
-    async.forEachSeries(
+    grunt.util.async.forEachSeries(
       filepaths, function(filepath, callback) {
         casperjs(filepath, options, function(err) {
           if (err) {
@@ -39,5 +43,7 @@ module.exports = function(grunt) {
         });
       },
     done);
+
   });
+
 };
