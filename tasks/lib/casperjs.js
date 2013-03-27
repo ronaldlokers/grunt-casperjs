@@ -1,10 +1,14 @@
+var path = require('path')
+
 exports.init = function(grunt) {
   var exports = {};
-  
+
   exports.casperjs = function(filepath, options, callback) {
 
-    var command = 'casperjs test',
-        exec = require('child_process').exec;
+    var capserPath = path.join(__dirname, '..', '..', 'lib', 'casperjs', 'casperjs-1.0.2', 'bin'),
+        command = path.join(capserPath, 'casperjs') + ' test',
+        exec = require('child_process').exec,
+        phantomBinPath = require('phantomjs').path;
 
     // Add options documented in the following web site:
     //   http://casperjs.org/testing.html
@@ -51,9 +55,13 @@ exports.init = function(grunt) {
       }
     }
 
-    exec(command, puts);
-    
+    exec(command, {
+        env: {
+            "PHANTOMJS_EXECUTABLE": phantomBinPath
+        }
+    }, puts);
+
   };
-  
+
   return exports;
 };
