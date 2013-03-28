@@ -32,8 +32,20 @@ exports.init = function(grunt) {
       command += ' --post=' + options.post.join(',');
     }
 	
-	if (options.webSecurity === false) {
+	  if (options.webSecurity === false) {
       command += ' --web-security=no';
+    }
+
+    if (options.proxy) {
+      command += ' --proxy='+ options.proxy;
+    }
+
+    if (options.proxyType) {
+      command += ' --proxy-type='+ options.proxyType;
+    }
+
+    if (options.outputEncoding) {
+      command += ' --output-encoding='+ options.outputEncoding;
     }
 
     command += " " + filepath;
