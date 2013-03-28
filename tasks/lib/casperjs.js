@@ -48,6 +48,12 @@ exports.init = function(grunt) {
       command += ' --output-encoding='+ options.outputEncoding;
     }
 
+    if (options.sslProtocol) {
+      command += ' --ssl-protocol='+ options.sslProtocol;
+    }
+
+
+
     command += " " + filepath;
 
     grunt.log.write("Command: " + command);
