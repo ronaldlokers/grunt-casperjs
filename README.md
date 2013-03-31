@@ -33,8 +33,8 @@ grunt.initConfig({
     },
     your_target: {
       // Target-specific file lists and/or options go here.
-    },
-  },
+    }
+  }
 })
 ```
 
@@ -46,9 +46,7 @@ grunt.initConfig({
 grunt.initConfig({
   casperjs: {
     options: {},
-    files: {
-      ['tests/casperjs/**/*.js']
-    },
+    files: ['tests/casperjs/**/*.js']
   },
 })
 ```
