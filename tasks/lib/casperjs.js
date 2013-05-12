@@ -67,7 +67,7 @@ exports.init = function(grunt) {
 
     command += " " + filepath;
 
-    grunt.log.write("Command: " + command);
+    grunt.log.writeln("Command: " + command);
 
     function puts(error, stdout, stderr) {
       grunt.log.write('\nRunning tests from "' + filepath + '":\n');
