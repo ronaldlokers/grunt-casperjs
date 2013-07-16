@@ -23,6 +23,10 @@ exports.init = function(grunt) {
     if (options.logLevel) {
       command += ' --log-level=' + options.logLevel;
     }
+    
+    if (options.engine) {
+      command += ' --engine=' + options.engine;
+    }
 
     if (options.pre) {
       command += ' --pre=' + options.pre.join(',');
