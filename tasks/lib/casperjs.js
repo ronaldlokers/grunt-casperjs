@@ -5,7 +5,7 @@ exports.init = function(grunt) {
 
   exports.casperjs = function(filepath, options, callback) {
 
-    var capserPath = path.join(__dirname, '..', '..', 'lib', 'casperjs', 'casperjs-1.0.2', 'bin'),
+    var capserPath = path.join(__dirname, '..', '..', 'lib', 'casperjs', 'casperjs-1.0.3', 'bin'),
         command = path.join(capserPath, 'casperjs') + ' test',
         exec = require('child_process').exec,
         phantomBinPath = require('phantomjs').path;
