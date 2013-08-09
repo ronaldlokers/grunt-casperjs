@@ -60,6 +60,10 @@ exports.init = function(grunt) {
       command += ' --cookies-file='+ options.cookiesFile;
     }
 
+    if (options.ignoreSslErrors) {
+      command += ' --ignore-ssl-errors='+ options.ignoreSslErrors;
+    }
+
 
     command += " " + filepath;
 
