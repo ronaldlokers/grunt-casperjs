@@ -30,9 +30,9 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "phantomjs": "1.8.2-0",
+    "phantomjs": "1.9.1-0",
     "rimraf": "~2.1.4",
-    "adm-zip": "~0.2.1"
+    "adm-zip": "~0.4.3"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",
