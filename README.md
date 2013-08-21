@@ -45,10 +45,29 @@ grunt.initConfig({
 ```js
 grunt.initConfig({
   casperjs: {
-    options: {},
+    options: {
+      async: {
+        parallel: false
+      }
+    },
     files: ['tests/casperjs/**/*.js']
   },
 })
+```
+
+#### Async Parallel
+
+By default, tests are run in series. If your tests are independent, you can run them in parallel.
+
+```javascript
+casperjs: {
+  options: {
+    async: {
+      parallel: true
+    }
+  },
+  files: ['tests/casperjs/**/*.js']
+}
 ```
 
 ## Contributing

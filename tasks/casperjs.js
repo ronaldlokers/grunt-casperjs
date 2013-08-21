@@ -16,7 +16,11 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var done = this.async(),
         filepaths = [], 
-        options = this.options();
+        options = grunt.util._.defaults(this.options(), {async: {}}),
+        asyncLoop = options.async.parallel ? 'forEach' : 'forEachSeries';
+
+    // Get rid of the async options since they're unrelated to casper/phantom
+    delete options.async;
 
     // Iterate over all specified file groups.
     this.files.forEach(function(file) {
@@ -33,7 +37,7 @@ module.exports = function(grunt) {
       });
     });
 
-    grunt.util.async.forEachSeries(
+    grunt.util.async[asyncLoop](
       filepaths, function(filepath, callback) {
         casperjs(filepath, options, function(err) {
           if (err) {
