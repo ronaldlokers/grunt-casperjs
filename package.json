@@ -1,7 +1,7 @@
 {
   "name": "grunt-casperjs",
   "description": "With this grunt.js task you can run tests with CasperJS.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "homepage": "https://github.com/ronaldlokers/grunt-casperjs",
   "author": {
     "name": "Ronald Lokers",
