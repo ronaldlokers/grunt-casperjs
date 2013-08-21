@@ -26,7 +26,13 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
+    "install": "node install.js",
     "test": "grunt test"
+  },
+  "dependencies": {
+    "phantomjs": "1.9.1-0",
+    "rimraf": "~2.1.4",
+    "adm-zip": "~0.4.3"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",
