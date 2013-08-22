@@ -5,8 +5,7 @@ exports.init = function(grunt) {
 
   exports.casperjs = function(filepath, options, callback) {
 
-    var capserPath = path.join(__dirname, '..', '..', 'lib', 'casperjs', 'casperjs-1.0.3', 'bin'),
-        command = path.join(capserPath, 'casperjs') + ' test',
+    var command = path.join(__dirname, '..', '..', 'casperjs') + ' test',
         exec = require('child_process').exec,
         phantomBinPath = require('phantomjs').path;
 
@@ -27,7 +26,7 @@ exports.init = function(grunt) {
     if (options.logLevel) {
       command += ' --log-level=' + options.logLevel;
     }
-    
+
     if (options.engine) {
       command += ' --engine=' + options.engine;
     }
@@ -39,7 +38,7 @@ exports.init = function(grunt) {
     if (options.post) {
       command += ' --post=' + options.post.join(',');
     }
-	
+
 	  if (options.webSecurity === false) {
       command += ' --web-security=no';
     }
