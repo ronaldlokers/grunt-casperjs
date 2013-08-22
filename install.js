@@ -15,6 +15,19 @@ var libPath = path.join(__dirname, 'lib', 'casperjs')
 var tmpPath = path.join(__dirname, 'tmp')
 var downloadUrl = 'https://github.com/n1k0/casperjs/archive/1.0.3.zip'
 
+
+
+function isCasperInstalled(notInstalledCallback) {
+    cp.exec("casperjs --version", function(error, stdout, stderr) {
+        if ( error || stderr || !stdout.length ) {
+            console.log("Casperjs not installed.  Installing.");
+            notInstalledCallback();
+        } else {
+            console.log("Casperjs already installed: " + stdout);
+        }
+    });
+}
+
 function tidyUp() {
     rimraf(tmpPath);
 }
@@ -43,13 +56,13 @@ function downloadZipFromGithub() {
         } else {
             response.pipe(file);
             response.on('data', function(chunk) {
-               console.log('Receiving ' + Math.floor((lengthSoFar += chunk.length) / 1024) + 'K...' );
+                console.log('Receiving ' + Math.floor((lengthSoFar += chunk.length) / 1024) + 'K...' );
             }).
-            on('end', unzipTheZippedFile).
-            on('error', function(e) {
-                console.log('An error occured whilst trying to download Casper.JS ' + e.message);
-                tidyUp();
-            });
+                on('end', unzipTheZippedFile).
+                on('error', function(e) {
+                    console.log('An error occured whilst trying to download Casper.JS ' + e.message);
+                    tidyUp();
+                });
         }
     });
     request.on('error', function(e) {
@@ -58,9 +71,11 @@ function downloadZipFromGithub() {
     });
 }
 
-if (!fs.existsSync(tmpPath)) {
-    fs.mkdirSync(tmpPath);
-}
-rimraf(libPath);
+isCasperInstalled(function() {
+    if (!fs.existsSync(tmpPath)) {
+        fs.mkdirSync(tmpPath);
+    }
+    rimraf(libPath);
 
-downloadZipFromGithub();
+    downloadZipFromGithub();
+});
