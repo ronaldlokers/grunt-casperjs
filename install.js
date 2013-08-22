@@ -18,12 +18,13 @@ var downloadUrl = 'https://github.com/n1k0/casperjs/archive/1.0.3.zip'
 
 
 function isCasperInstalled(notInstalledCallback) {
-    cp.exec("casperjs --version", function(error, stdout, stderr) {
-        if ( error || stderr || !stdout.length ) {
+    cp.exec("which casperjs", function(error, stdout, stderr) {
+        if ( error ) {
             console.log("Casperjs not installed.  Installing.");
             notInstalledCallback();
         } else {
             console.log("Casperjs already installed: " + stdout);
+            fs.symlinkSync(stdout.replace(/\s/, ''), './casperjs');
         }
     });
 }
@@ -38,7 +39,8 @@ function unzipTheZippedFile() {
 
     if (process.platform != 'win32') {
         var pathToCommand = path.join(libPath, 'casperjs-1.0.3', 'bin', 'casperjs');
-        var stat = fs.statSync(pathToCommand)
+        fs.symlinkSync(pathToCommand, './casperjs');
+        var stat = fs.statSync(pathToCommand);
         if (!(stat.mode & 64)) {
             fs.chmodSync(pathToCommand, '755')
         }
