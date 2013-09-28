@@ -86,12 +86,10 @@ exports.init = function(grunt) {
         callback();
       }
     }
+    
+    process.env["PHANTOMJS_EXECUTABLE"] = phantomBinPath;
 
-    exec(command, {
-        env: {
-            "PHANTOMJS_EXECUTABLE": phantomBinPath
-        }
-    }, puts);
+    exec(command, puts);
 
   };
 
