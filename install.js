@@ -18,7 +18,8 @@ var downloadUrl = 'https://github.com/n1k0/casperjs/archive/1.0.3.zip'
 
 
 function isCasperInstalled(notInstalledCallback) {
-    cp.exec("which casperjs", function(error, stdout, stderr) {
+    // Note that "which" doesn't work on windows.
+    cp.exec("casperjs --version", function(error, stdout, stderr) {
         if ( error ) {
             console.log("Casperjs not installed.  Installing.");
             notInstalledCallback();
