@@ -75,6 +75,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## CHANGELOG
+* 1.1.2 Fix for windows installation
 * 1.1.1 Use latest version of PhantomJS ~1.9
 * 1.0.10 Fix env-vars dumping
 * 1.0.9 If user has local casperjs, use that first.
