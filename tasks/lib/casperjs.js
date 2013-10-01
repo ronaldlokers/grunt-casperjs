@@ -64,11 +64,6 @@ exports.init = function(grunt) {
     }
 
     if (options.ignoreSslErrors) {
-      command += ' --ignore-ssl-errors='+ options.ignoreSslErrors;
-    }
-
-
-    if (options.ignoreSslErrors) {
       command += ' --ignore-ssl-errors=yes';
     }
 
