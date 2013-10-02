@@ -21,9 +21,9 @@ function isCasperInstalled(notInstalledCallback) {
     findInstalledCasper(function(path, version) {
         if (path) {
             console.log("Use already installed Casperjs.");
-            console.log("  Version: " + stdout);
-            console.log("  Path:    " + pathStdout);
-            fs.symlinkSync(pathStdout.replace(/\s/, ''), './casperjs');
+            console.log("  Version: " + version);
+            console.log("  Path:    " + path);
+            fs.symlinkSync(path, './casperjs');
         } else {
             console.log("Casperjs not installed.  Installing.");
             notInstalledCallback();
