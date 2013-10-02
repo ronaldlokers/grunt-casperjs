@@ -37,7 +37,7 @@ function findInstalledCasper(foundCallback) {
         if (path) {
             cp.exec("casperjs --version", function(error, version, stderr) {
                 foundCallback(path.trim(), version.trim());
-            }
+            });
         } else {
             foundCallback();
         }
