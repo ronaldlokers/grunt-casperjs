@@ -91,6 +91,7 @@ var casper = require('casper').create();
 
 casper.start('http://www.google.nl/', function() {
   this.test.assertEquals(casper.cli.get('param'), 'value');
+});
 ```
 
 ## Contributing
