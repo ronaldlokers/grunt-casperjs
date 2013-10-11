@@ -70,6 +70,29 @@ casperjs: {
 }
 ```
 
+#### Custom options
+
+CasperJS supports custom options passed via flags on the command line. These can be passed through to your tests via the ```options.custom``` object in your Grunt config.
+
+```javascript
+casperjs: {
+  options: {
+    custom: {
+      param: 'value'
+    }
+  }
+}
+```
+
+To make use of your custom parameters in your test file, use ```casper.cli.get()```.
+
+```javascript
+var casper = require('casper').create();
+
+casper.start('http://www.google.nl/', function() {
+  this.test.assertEquals(casper.cli.get('param'), 'value');
+```
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
