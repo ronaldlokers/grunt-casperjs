@@ -18,14 +18,28 @@ var downloadUrl = 'https://github.com/n1k0/casperjs/archive/1.0.3.zip'
 
 
 function isCasperInstalled(notInstalledCallback) {
-    // Note that "which" doesn't work on windows.
-    cp.exec("casperjs --version", function(error, stdout, stderr) {
-        if ( error ) {
+    findInstalledCasper(function(path, version) {
+        if (path) {
+            console.log("Use already installed Casperjs.");
+            console.log("  Version: " + version);
+            console.log("  Path:    " + path);
+            fs.symlinkSync(path, './casperjs');
+        } else {
             console.log("Casperjs not installed.  Installing.");
             notInstalledCallback();
+        }
+    });
+}
+
+function findInstalledCasper(foundCallback) {
+    // Note that "which" doesn't work on windows...
+    cp.exec("which casperjs", function(error, path, stderr) {
+        if (path) {
+            cp.exec("casperjs --version", function(error, version, stderr) {
+                foundCallback(path.trim(), version.trim());
+            });
         } else {
-            console.log("Casperjs already installed: " + stdout);
-            fs.symlinkSync(stdout.replace(/\s/, ''), './casperjs');
+            foundCallback();
         }
     });
 }
