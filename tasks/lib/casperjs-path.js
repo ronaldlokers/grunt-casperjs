@@ -1,4 +1,6 @@
 // Simple casperjs script to echo the casperjs path.
+
+/* global phantom */
 var casper = require('casper').create();
 
 casper.start();
