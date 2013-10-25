@@ -24,9 +24,9 @@ function isCasperInstalled(notInstalledCallback) {
             console.log("Casperjs not installed.  Installing.");
             notInstalledCallback();
         } else {
-            var casperVersion = stdout.replace(/\s/, '');
-            cp.exec("casperjs " + path.join(__dirname, "tasks", "lib", "casperjs-path.js"), function(error, stdout, stderr) {
-                var casperPath = stdout.replace(/\s/, '');
+            var casperVersion = stdout.replace(/^\s+|\s+$/g,'');
+            cp.exec("casperjs '" + path.join(__dirname, "tasks", "lib", "casperjs-path.js") + "'", function(error, stdout, stderr) {
+                var casperPath = stdout.replace(/^\s+|\s+$/g,'');
                 console.log("Casperjs version " + casperVersion + " installed at " + casperPath);
                 var casperExecutable = path.join(casperPath, "bin", "casperjs");
                 fs.symlinkSync(casperExecutable, './casperjs');
