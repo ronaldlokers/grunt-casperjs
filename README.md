@@ -73,7 +73,7 @@ casperjs: {
 #### Install script and CasperJS version
 The install.js script is responsible for searching for existing CasperJS installations in the path. If found, as of grunt-casperjs v1.2.0, that version of CasperJS will be used. If not found, a stable version of CasperJS will be installed (under review).
 
-grunt-casperjs was tested with the currently stable version of CasperJS, 1.0.3.
+grunt-casperjs was tested with the currently stable version of CasperJS, 1.1.x
 
 **If you would like to use a different version of casperjs**, install it yourself globally before installing grunt-casperjs. It will use that one.
 
@@ -82,6 +82,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## CHANGELOG
+* 1.3.0 Bump to using the latest version of CasperJs
 * 1.2.1 CasperJS installations in path will be used
 * 1.2.0 Cleaner fix for installing grunt
 * 1.1.2 Fix for windows installation
