@@ -8,6 +8,22 @@
     "email": "ronaldlokers@me.com",
     "url": "http://www.ronaldlokers.nl"
   },
+ "contributors": [
+   {
+     "name": "Ronald Lokers",
+     "email": "ronaldlokers@me.com",
+     "url": "http://www.ronaldlokers.nl"
+   },
+   {
+     "name": "Nick Sullivan",
+     "email": "nick@sullivanflock.com",
+     "url": "http://creationeer.me"
+   },
+   {
+     "name": "Jatin Chopra",
+     "url": "https://github.com/jatin-"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/ronaldlokers/grunt-casperjs.git"
