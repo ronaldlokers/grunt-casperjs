@@ -13,7 +13,8 @@ fs.existsSync = fs.existsSync || path.existsSync
 
 var libPath = path.join(__dirname, 'lib', 'casperjs')
 var tmpPath = path.join(__dirname, 'tmp')
-var downloadUrl = 'https://github.com/n1k0/casperjs/archive/1.0.3.zip'
+var version = 'master'
+var downloadUrl = 'https://github.com/n1k0/casperjs/archive/' + version + '.zip'
 
 
 
@@ -24,8 +25,13 @@ function isCasperInstalled(notInstalledCallback) {
             console.log("Casperjs not installed.  Installing.");
             notInstalledCallback();
         } else {
-            console.log("Casperjs already installed: " + stdout);
-            fs.symlinkSync(stdout.replace(/\s/, ''), './casperjs');
+            var casperVersion = stdout.replace(/^\s+|\s+$/g,'');
+            cp.exec("casperjs '" + path.join(__dirname, "tasks", "lib", "casperjs-path.js") + "'", function(error, stdout, stderr) {
+                var casperPath = stdout.replace(/^\s+|\s+$/g,'');
+                console.log("Casperjs version " + casperVersion + " installed at " + casperPath);
+                var casperExecutable = path.join(casperPath, "bin", "casperjs");
+                fs.symlinkSync(casperExecutable, './casperjs');
+            });
         }
     });
 }
@@ -39,7 +45,7 @@ function unzipTheZippedFile() {
     zip.extractAllTo(libPath, true);
 
     if (process.platform != 'win32') {
-        var pathToCommand = path.join(libPath, 'casperjs-1.0.3', 'bin', 'casperjs');
+        var pathToCommand = path.join(libPath, 'casperjs-' + version, 'bin', 'casperjs');
         fs.symlinkSync(pathToCommand, './casperjs');
         var stat = fs.statSync(pathToCommand);
         if (!(stat.mode & 64)) {

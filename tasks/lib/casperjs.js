@@ -5,66 +5,67 @@ exports.init = function(grunt) {
 
   exports.casperjs = function(filepath, options, callback) {
 
-    var command = path.join(__dirname, '..', '..', 'casperjs') + ' test',
-        exec = require('child_process').exec,
+    var command = path.join(__dirname, '..', '..', 'casperjs'),
+        args = ['test'],
+        spawn = require('child_process').spawn,
         phantomBinPath = require('phantomjs').path;
 
     // Add options documented in the following web site:
     //   http://casperjs.org/testing.html
     if (options.xunit) {
-      command += ' --xunit=' + options.xunit;
+      args.push('--xunit=' + options.xunit);
     }
 
     if (options.direct) {
-      command += ' --direct';
+      args.push('--direct');
     }
 
     if (options.includes) {
-      command += ' --includes=' + options.includes.join(',');
+      args.push('--includes=' + options.includes.join(','));
     }
 
     if (options.logLevel) {
-      command += ' --log-level=' + options.logLevel;
+      args.push('--log-level=' + options.logLevel);
     }
 
     if (options.engine) {
-      command += ' --engine=' + options.engine;
+      args.push('--engine=' + options.engine);
     }
 
     if (options.pre) {
-      command += ' --pre=' + options.pre.join(',');
+      args.push('--pre=' + options.pre.join(','));
     }
 
     if (options.post) {
-      command += ' --post=' + options.post.join(',');
+      args.push('--post=' + options.post.join(','));
     }
 
-	  if (options.webSecurity === false) {
-      command += ' --web-security=no';
+    if (options.webSecurity === false) {
+      args.push('--web-security=no');
     }
 
     if (options.proxy) {
-      command += ' --proxy='+ options.proxy;
+      args.push('--proxy='+ options.proxy);
     }
 
     if (options.proxyType) {
-      command += ' --proxy-type='+ options.proxyType;
+      args.push('--proxy-type='+ options.proxyType);
     }
 
     if (options.outputEncoding) {
-      command += ' --output-encoding='+ options.outputEncoding;
+      args.push('--output-encoding='+ options.outputEncoding);
     }
 
     if (options.sslProtocol) {
-      command += ' --ssl-protocol='+ options.sslProtocol;
+      args.push('--ssl-protocol='+ options.sslProtocol);
     }
 
     if (options.cookiesFile) {
-      command += ' --cookies-file='+ options.cookiesFile;
+      args.push('--cookies-file='+ options.cookiesFile);
     }
 
     if (options.ignoreSslErrors) {
-      command += ' --ignore-ssl-errors=yes';
+      args.push('--ignore-ssl-errors=yes');
     }
 
     if (options.custom) {
@@ -73,24 +74,24 @@ exports.init = function(grunt) {
         }
     }
 
-    command += " " + filepath;
+    args.push(filepath);
 
     grunt.log.writeln("Command: " + command);
 
-    function puts(error, stdout, stderr) {
-      grunt.log.write('\nRunning tests from "' + filepath + '":\n');
-      grunt.log.write(stdout);
-
-      if ( error !== null ) {
-        callback(error);
-      } else {
-        callback();
-      }
-    }
-    
     process.env["PHANTOMJS_EXECUTABLE"] = phantomBinPath;
 
-    exec(command, puts);
+    grunt.log.write('\nRunning tests from "' + filepath + '":\n');
+
+    grunt.util.spawn({
+      cmd: command,
+      args: args,
+      opts: {
+        // pipe stdout/stderr through
+        stdio: 'inherit'
+      }
+    }, function(error, stdout, code) {
+      callback(error);
+    });
 
   };
 
