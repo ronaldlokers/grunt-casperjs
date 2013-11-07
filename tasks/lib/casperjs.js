@@ -1,4 +1,4 @@
-var path = require('path')
+var path = require('path');
 
 exports.init = function(grunt) {
   var exports = {};
@@ -40,6 +40,18 @@ exports.init = function(grunt) {
       args.push('--post=' + options.post.join(','));
     }
 
+    if (options.failFast) {
+      args.push('--fail-fast');
+    }
+
+    if (options.concise) {
+      args.push('--concise');
+    }
+
+    if (options.noColors) {
+      args.push('--no-colors');
+    }
+
     if (options.webSecurity === false) {
       args.push('--web-security=no');
     }
@@ -68,7 +80,7 @@ exports.init = function(grunt) {
       args.push('--ignore-ssl-errors=yes');
     }
 
-    args.push(filepath);
+    args = args.concat(filepath);
 
     grunt.log.writeln("Command: " + command);
 
