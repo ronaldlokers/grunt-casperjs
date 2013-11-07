@@ -46,27 +46,36 @@ grunt.initConfig({
 grunt.initConfig({
   casperjs: {
     options: {
-      async: {
-        parallel: false
-      }
+      async: 'series'
     },
     files: ['tests/casperjs/**/*.js']
   },
 })
 ```
 
-#### Async Parallel
+#### Async Options
 
-By default, tests are run in series. If your tests are independent, you can run them in parallel.
+Async options allow tests to run in separate casperjs processes asynchronously. By default, tests are run in series, but if your tests are independent, you can run them in parallel.
 
 ```javascript
 casperjs: {
   options: {
-    async: {
-      parallel: true
-    }
+    async: 'parallel'
   },
   files: ['tests/casperjs/**/*.js']
+}
+```
+
+If you specify `async: 'none'`, all tests will be executed in a single casperjs process. This is useful if you want options to apply to all tests at once. For example, using `pre` would execute a script before all tests are run, otherwise it would execute the script before each test is run. This is also helpful for aggregating all results into a single xml file with `xunit` option.
+
+```javascript
+casperjs: {
+  options: {
+    async: 'none',
+    pre: 'tests/casperjs/init.js',
+    xunit: 'results.xml'
+  },
+  files: ['tests/casperjs/**/test-*.js']
 }
 ```
 

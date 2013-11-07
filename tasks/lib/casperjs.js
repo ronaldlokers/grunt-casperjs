@@ -80,7 +80,7 @@ exports.init = function(grunt) {
       args.push('--ignore-ssl-errors=yes');
     }
 
-    args.push(filepath);
+    args = args.concat(filepath);
 
     grunt.log.writeln("Command: " + command);
 
