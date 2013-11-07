@@ -1,4 +1,4 @@
-var path = require('path')
+var path = require('path');
 
 exports.init = function(grunt) {
   var exports = {};
@@ -38,6 +38,18 @@ exports.init = function(grunt) {
 
     if (options.post) {
       args.push('--post=' + options.post.join(','));
+    }
+
+    if (options.failFast) {
+      args.push('--fail-fast');
+    }
+
+    if (options.concise) {
+      args.push('--concise');
+    }
+
+    if (options.noColors) {
+      args.push('--no-colors');
     }
 
     if (options.webSecurity === false) {
