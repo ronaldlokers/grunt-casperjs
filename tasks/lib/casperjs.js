@@ -70,7 +70,7 @@ exports.init = function(grunt) {
 
     if (options.custom) {
         for (option in options.custom) {
-            command += ' --' + option + '=' + options.custom[option];
+            args.push('--' + option + '=' + options.custom[option]);
         }
     }
 
