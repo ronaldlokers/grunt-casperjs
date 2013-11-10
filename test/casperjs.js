@@ -14,6 +14,7 @@ casper.then(function() {
     this.test.assertEval(function() {
         return __utils__.findAll('h3.r').length >= 10;
     }, 'google search for "foo" retrieves 10 or more results');
+    this.test.assertEquals(casper.cli.get('customParam'), 'bar', 'custom parameter specified in Gruntfile has been fetched');
 });
 
 casper.run(function() {

@@ -70,6 +70,30 @@ casperjs: {
 }
 ```
 
+#### Custom options
+
+CasperJS supports custom options passed via flags on the command line. These can be passed through to your tests via the ```options.custom``` object in your Grunt config.
+
+```javascript
+casperjs: {
+  options: {
+    custom: {
+      param: 'value'
+    }
+  }
+}
+```
+
+To make use of your custom parameters in your test file, use ```casper.cli.get()```.
+
+```javascript
+var casper = require('casper').create();
+
+casper.start('http://www.google.nl/', function() {
+  this.test.assertEquals(casper.cli.get('param'), 'value');
+});
+```
+
 #### Install script and CasperJS version
 The install.js script is responsible for searching for existing CasperJS installations in the path. If found, as of grunt-casperjs v1.2.0, that version of CasperJS will be used. If not found, a stable version of CasperJS will be installed (under review).
 
