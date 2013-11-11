@@ -24,12 +24,10 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     casperjs: {
-      files: ['test/casperjs.js'],
       options: {
-        custom: {
-          customParam: 'bar'
-        }
-      }
+        casperjsOptions: ["--foo=bar"]
+      },
+      files: ['test/casperjs.js']
     },
 
   });

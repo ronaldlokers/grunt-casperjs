@@ -10,68 +10,8 @@ exports.init = function(grunt) {
         spawn = require('child_process').spawn,
         phantomBinPath = require('phantomjs').path;
 
-    // Add options documented in the following web site:
-    //   http://casperjs.org/testing.html
-    if (options.xunit) {
-      args.push('--xunit=' + options.xunit);
-    }
-
-    if (options.direct) {
-      args.push('--direct');
-    }
-
-    if (options.includes) {
-      args.push('--includes=' + options.includes.join(','));
-    }
-
-    if (options.logLevel) {
-      args.push('--log-level=' + options.logLevel);
-    }
-
-    if (options.engine) {
-      args.push('--engine=' + options.engine);
-    }
-
-    if (options.pre) {
-      args.push('--pre=' + options.pre.join(','));
-    }
-
-    if (options.post) {
-      args.push('--post=' + options.post.join(','));
-    }
-
-    if (options.webSecurity === false) {
-      args.push('--web-security=no');
-    }
-
-    if (options.proxy) {
-      args.push('--proxy='+ options.proxy);
-    }
-
-    if (options.proxyType) {
-      args.push('--proxy-type='+ options.proxyType);
-    }
-
-    if (options.outputEncoding) {
-      args.push('--output-encoding='+ options.outputEncoding);
-    }
-
-    if (options.sslProtocol) {
-      args.push('--ssl-protocol='+ options.sslProtocol);
-    }
-
-    if (options.cookiesFile) {
-      args.push('--cookies-file='+ options.cookiesFile);
-    }
-
-    if (options.ignoreSslErrors) {
-      args.push('--ignore-ssl-errors=yes');
-    }
-
-    if (options.custom) {
-        for (option in options.custom) {
-            args.push('--' + option + '=' + options.custom[option]);
-        }
+    if (options.casperjsOptions && options.casperjsOptions.length > 0) {
+        args = args.concat(options.casperjsOptions);
     }
 
     args.push(filepath);
