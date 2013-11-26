@@ -94,6 +94,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## CHANGELOG
+* 1.4.1 Lock to casper js version `1.0.3` instead of `master` (to be incremented soon)
 * 1.4.0 Options can be passed into CasperJS. Any option.
 * 1.3.0 Bump to using the latest version of CasperJs
 * 1.2.1 CasperJS installations in path will be used
