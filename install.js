@@ -13,8 +13,8 @@ fs.existsSync = fs.existsSync || path.existsSync
 
 var libPath = path.join(__dirname, 'lib', 'casperjs')
 var tmpPath = path.join(__dirname, 'tmp')
-var version = 'master'
-var downloadUrl = 'https://github.com/n1k0/casperjs/archive/' + version + '.zip'
+var version = '1.0.3'
+var downloadUrl = 'https://codeload.github.com/n1k0/casperjs/zip/' + version
 
 
 
