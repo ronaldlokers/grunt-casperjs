@@ -1,12 +1,24 @@
-var path = require('path')
+var path = require('path');
+var fs = require('fs');
 
 exports.init = function(grunt) {
   var exports = {};
 
   exports.casperjs = function(filepath, options, callback) {
 
-    var command = path.join(__dirname, '..', '..', 'casperjs'),
-        args = ['test'],
+    var command = "./node_modules/.bin/casperjs";
+    if (!fs.existsSync(command)) {
+      grunt.log.error("CasperJS not found");
+      command = path.join(__dirname, '..', '..', 'node_modules', '.bin', 'casperjs');
+      if (!fs.existsSync(command)) {
+        grunt.log.error("CasperJS not found");
+        command = path.join(__dirname, '..', '..', '..', 'casperjs', 'bin', 'casperjs');
+      }
+    }
+    if (process.platform === 'win32') {
+      command += ".cmd";
+    }
+    var args = ['test'],
         spawn = require('child_process').spawn,
         phantomBinPath = require('phantomjs').path;
 
