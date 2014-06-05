@@ -8,20 +8,20 @@
     "email": "ronaldlokers@me.com",
     "url": "http://www.ronaldlokers.nl"
   },
- "contributors": [
-   {
-     "name": "Ronald Lokers",
-     "email": "ronaldlokers@me.com",
-     "url": "http://www.ronaldlokers.nl"
-   },
-   {
-     "name": "Nick Sullivan",
-     "email": "nick@sullivanflock.com",
-     "url": "http://creationeer.me"
-   },
-   {
-     "name": "Jatin Chopra",
-     "url": "https://github.com/jatin-"
+  "contributors": [
+    {
+      "name": "Ronald Lokers",
+      "email": "ronaldlokers@me.com",
+      "url": "http://www.ronaldlokers.nl"
+    },
+    {
+      "name": "Nick Sullivan",
+      "email": "nick@sullivanflock.com",
+      "url": "http://creationeer.me"
+    },
+    {
+      "name": "Jatin Chopra",
+      "url": "https://github.com/jatin-"
     }
   ],
   "repository": {
@@ -48,7 +48,8 @@
   "dependencies": {
     "phantomjs": "~1.9.1",
     "rimraf": "~2.1.4",
-    "adm-zip": "~0.4.3"
+    "adm-zip": "~0.4.3",
+    "request": "~2.36.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",
