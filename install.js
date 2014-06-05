@@ -8,6 +8,7 @@ var path = require('path')
 var url = require('url')
 var rimraf = require('rimraf').sync
 var AdmZip = require('adm-zip')
+var request = require('request')
 
 fs.existsSync = fs.existsSync || path.existsSync
 
@@ -22,7 +23,7 @@ function isCasperInstalled(notInstalledCallback) {
     // Note that "which" doesn't work on windows.
     cp.exec("casperjs --version", function(error, stdout, stderr) {
         if ( error ) {
-            console.log("Casperjs not installed.  Installing.");
+            console.log("Casperjs not installed.  Installing...");
             notInstalledCallback();
         } else {
             var casperVersion = stdout.replace(/^\s+|\s+$/g,'');
@@ -56,27 +57,40 @@ function unzipTheZippedFile() {
 }
 
 function downloadZipFromGithub() {
-    var file = fs.createWriteStream(path.join(tmpPath, "archive.zip"));
-    var lengthSoFar = 0;
-    var request = https.get(downloadUrl, function(response) {
-        if (response.statusCode === 301 || response.statusCode === 302) {
-            downloadUrl = response.headers.location;
-            downloadZipFromGithub();
+    var requestOptions = {
+        uri: downloadUrl,
+        encoding: null, // Get response as a buffer
+        followRedirect: true, // The default download path redirects to a CDN URL.
+        headers: {}
+    };
+
+    request(requestOptions, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+            fs.writeFileSync(path.join(tmpPath, "archive.zip"), body);
+
+            console.log( Math.floor(body.length / 1025) + "KB received. Unzipping...");
+            unzipTheZippedFile();
+        } else if (response) {
+            console.error('Error requesting archive.\n' +
+                  'Status: ' + response.statusCode + '\n' +
+                  'Request options: ' + JSON.stringify(requestOptions, null, 2) + '\n' +
+                  'Response headers: ' + JSON.stringify(response.headers, null, 2) + '\n');
+
+            tidyUp();
+            exit(1);
+        } else if (error) {
+            console.error('Error making request.\n' + error.stack + '\n\n' +
+              'Please report this full log at https://github.com/ronaldlokers/grunt-casperjs');
+
+            tidyUp();
+            exit(1);
         } else {
-            response.pipe(file);
-            response.on('data', function(chunk) {
-                console.log('Receiving ' + Math.floor((lengthSoFar += chunk.length) / 1024) + 'K...' );
-            }).
-                on('end', unzipTheZippedFile).
-                on('error', function(e) {
-                    console.log('An error occured whilst trying to download Casper.JS ' + e.message);
-                    tidyUp();
-                });
-        }
-    });
-    request.on('error', function(e) {
-        console.log('An error occured whilst trying to download Casper.JS ' + e.message);
-        tidyUp();
+            console.error('Something unexpected happened, please report this full ' +
+              'log at https://github.com/ronaldlokers/grunt-casperjs');
+
+            tidyUp();
+            exit(1);
+       }
     });
 }
 
