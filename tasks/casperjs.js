@@ -37,6 +37,8 @@ module.exports = function(grunt) {
       });
     });
 
+    var index = 1;
+
     grunt.util.async[asyncLoop](
       filepaths, function(filepath, callback) {
         casperjs(filepath, options, function(err) {
@@ -44,7 +46,7 @@ module.exports = function(grunt) {
             grunt.warn(err);
           }
           callback();
-        });
+        }, index++);
       },
     done);
 
