@@ -37,19 +37,12 @@
       "url": "https://github.com/ronaldlokers/grunt-casperjs/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.8.0"
   },
-  "scripts": {
-    "install": "node install.js",
-    "test": "grunt test"
-  },
   "dependencies": {
     "phantomjs": "~1.9.1",
-    "rimraf": "~2.1.4",
-    "adm-zip": "~0.4.3",
-    "request": "~2.36.0"
+    "casperjs": "~1.1.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",
