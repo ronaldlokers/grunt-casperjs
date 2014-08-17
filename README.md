@@ -94,6 +94,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## CHANGELOG
+* 2.0.0 Stop installing casperjs manually, let npm do it
 * 1.5.0 Fix critical install issue - https://github.com/ronaldlokers/grunt-casperjs/issues/55
 * 1.4.1 Lock to casper js version `1.0.3` instead of `master` (to be incremented soon)
 * 1.4.0 Options can be passed into CasperJS. Any option.
