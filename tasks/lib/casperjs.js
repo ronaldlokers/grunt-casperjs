@@ -8,10 +8,8 @@ exports.init = function(grunt) {
 
     var command = "./node_modules/.bin/casperjs";
     if (!fs.existsSync(command)) {
-      grunt.log.error("CasperJS not found");
       command = path.join(__dirname, '..', '..', 'node_modules', '.bin', 'casperjs');
       if (!fs.existsSync(command)) {
-        grunt.log.error("CasperJS not found");
         command = path.join(__dirname, '..', '..', '..', 'casperjs', 'bin', 'casperjs');
       }
     }
