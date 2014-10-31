@@ -6,10 +6,10 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+
 
 module.exports = function(grunt) {
-
+  'use strict';
   // Project configuration.
   grunt.initConfig({
     jshint: {
@@ -18,17 +18,21 @@ module.exports = function(grunt) {
         'tasks/*.js'
       ],
       options: {
-        jshintrc: '.jshintrc',
-      },
+        jshintrc: '.jshintrc'
+      }
     },
 
     // Configuration to be run (and then tested).
     casperjs: {
       options: {
-        casperjsOptions: ["--foo=bar"]
+        casperjsOptions: ["--foo=bar"],
+        engines: {
+          phantomjs: true,
+          slimerjs: false
+        }
       },
       files: ['test/casperjs.js']
-    },
+    }
 
   });
 

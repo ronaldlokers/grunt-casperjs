@@ -6,10 +6,10 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+
 
 module.exports = function(grunt) {
-
+  'use strict';
   var casperjs = require('./lib/casperjs').init(grunt).casperjs;
 
   grunt.registerMultiTask('casperjs', 'Run CasperJs tests.', function() {
