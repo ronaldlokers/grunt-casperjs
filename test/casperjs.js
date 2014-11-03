@@ -1,22 +1,50 @@
-var casper = require('casper').create();
+/*jshint strict:false*/
+/*global CasperError, console, phantom, require, casper*/
 
-casper.start('http://www.google.nl/', function() {
-    this.test.assertEquals(casper.cli.get('foo'), 'bar', "options were passed in successfully")
-    this.test.assertTitle('Google', 'google homepage title is the one expected');
-    this.test.assertExists('form[action="/search"]', 'main form is found');
-    this.fill('form[action="/search"]', {
-        q: 'foo'
-    }, true);
-});
+casper.test.begin('default test', 4, function(test) {
+    casper.start('http://www.google.com/');
 
-casper.then(function() {
-    this.test.assertTitle('foo - Google zoeken', 'google title is ok');
-    this.test.assertUrlMatch(/q=foo/, 'search term has been submitted');
-    this.test.assertEval(function() {
-        return __utils__.findAll('h3.r').length >= 10;
-    }, 'google search for "foo" retrieves 10 or more results');
-});
+    casper.waitFor(function() {
+        return this.evaluate(function() {
+            return document.title === 'Google';
+        });
+    }, function() {
+        test.pass('google homepage title is the one expected');
+    }, function() {
+        test.fail('Failed finding title');
+    });
 
-casper.run(function() {
-    this.test.renderResults(true);
+    if (casper.cli.get('foo') === 'bar') {
+        test.pass('options were passed in successfully');
+    } else {
+        test.fail('options were not passed in successfully');
+    }
+
+    casper.waitFor(function() {
+        return this.evaluate(function() {
+            return document.querySelectorAll('form[action="/search"]').length === 1;
+        });
+    }, function() {
+        test.pass('main form is found');
+    }, function() {
+        test.fail('Failed finding form');
+    });
+
+    casper.then(function () {
+        this.fillSelectors('form[action="/search"]', { 'input[name="q"]': 'foo' }, true);
+    });
+
+    casper.waitFor(function() {
+        return this.evaluate(function() {
+            return document.title === 'foo - Google Search';
+        });
+    }, function() {
+        test.pass('google search title is the one expected');
+    }, function() {
+        test.fail('Failed finding search title');
+    });
+
+    casper.run(function() {
+        test.done();
+    });
 });
