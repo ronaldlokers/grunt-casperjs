@@ -24,6 +24,16 @@ exports.init = function(grunt) {
         args = args.concat(options.casperjsOptions);
     }
 
+    if (options.xunit === true) {
+      var xunitFilePath = path.basename(filepath) + '.xml';
+
+      if (options.xunitReportDir) {
+        xunitFilePath = path.join(options.xunitReportDir, xunitFilePath);
+      }
+
+      args.push('--xunit=' + xunitFilePath);
+    }
+
     args.push(filepath);
 
     grunt.log.writeln("Command: " + command);

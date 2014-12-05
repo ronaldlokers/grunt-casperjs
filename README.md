@@ -82,6 +82,35 @@ casperjs: {
 }
 ```
 
+#### xUnit Options
+
+CasperJS can save a test's results in
+[xUnit XML format](http://casperjs.readthedocs.org/en/latest/testing.html#xunit-report),
+but you have to manually set a name for the output file. That doesn't work well
+when running a test suite programmatically.
+
+To generate xUnit reports named by appending `.xml` to test file names, set the
+`xunit` option to true:
+
+```javascript
+casperjs: {
+  options: {
+    xunit: true
+  }
+}
+```
+
+To save test results in a subdirectory, set the 'xunitReportDir' option:
+
+```javascript
+casperjs: {
+  options: {
+    xunit: true,
+    xunitReportDir: 'reports'
+  }
+}
+```
+
 #### Install script and CasperJS version
 The install.js script is responsible for searching for existing CasperJS installations in the path. If found, as of grunt-casperjs v1.2.0, that version of CasperJS will be used. If not found, a stable version of CasperJS will be installed (under review).
 
