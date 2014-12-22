@@ -94,6 +94,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## CHANGELOG
+* 2.1.1 2nd fix for caspersjs dependency version number
 * 2.0.1 Fix caspersjs dependency version number
 * 2.0.1 Remove incorrect error message
 * 2.0.0 Stop installing casperjs manually, let npm do it
