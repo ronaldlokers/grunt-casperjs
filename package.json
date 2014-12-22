@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "phantomjs": "~1.9.1",
-    "casperjs": "~1.1"
+    "casperjs": "1.1.0-beta3"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",
