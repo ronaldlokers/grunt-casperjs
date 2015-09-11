@@ -26,11 +26,15 @@ exports.init = function(grunt) {
 
     args.push(filepath);
 
-    grunt.log.writeln("Command: " + command);
+    if (!options.silent) {
+      grunt.log.writeln("Command: " + command);
+    }
 
     process.env["PHANTOMJS_EXECUTABLE"] = phantomBinPath;
 
-    grunt.log.write('\nRunning tests from "' + filepath + '":\n');
+    if (!options.silent) {
+      grunt.log.write('\nRunning tests from "' + filepath + '":\n');
+    }
 
     grunt.util.spawn({
       cmd: command,
