@@ -23,6 +23,7 @@ grunt.loadNpmTasks('grunt-casperjs');
 ## The "casperjs" task
 
 ### Overview
+
 In your project's Gruntfile, add a section named `casperjs` to the data object passed into `grunt.initConfig()`.
 
 ```js
@@ -48,7 +49,8 @@ grunt.initConfig({
     options: {
       async: {
         parallel: false
-      }
+      },
+      silent: false
     },
     files: ['tests/casperjs/**/*.js']
   },
@@ -70,9 +72,25 @@ casperjs: {
 }
 ```
 
+#### Silent
+
+The task says the casper path and test file being executed (which CasperJS also
+states) by default. Setting `silent` to true will suppress these grunt.log
+messages (does not affect CasperJs output, only the grunt.log output).
+
+```javascript
+casperjs: {
+  options: {
+    silent: true
+  },
+  files: ['tests/casperjs/**/*.js']
+}
+```
+
 #### CasperJS Options
 
 CasperJS options (including user defined ones) can be passed in using 'casperjsOptions' in the options object
+
 ```javascript
 casperjs: {
   options: {
@@ -83,6 +101,7 @@ casperjs: {
 ```
 
 #### Install script and CasperJS version
+
 The install.js script is responsible for searching for existing CasperJS installations in the path. If found, as of grunt-casperjs v1.2.0, that version of CasperJS will be used. If not found, a stable version of CasperJS will be installed (under review).
 
 grunt-casperjs was tested with the currently stable version of CasperJS, 1.1.x
@@ -90,10 +109,12 @@ grunt-casperjs was tested with the currently stable version of CasperJS, 1.1.x
 **If you would like to use a different version of casperjs**, install it yourself globally before installing grunt-casperjs. It will use that one.
 
 ## Contributing
+
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 
 ## CHANGELOG
+
 * 2.1.1 2nd fix for caspersjs dependency version number
 * 2.0.1 Fix caspersjs dependency version number
 * 2.0.1 Remove incorrect error message

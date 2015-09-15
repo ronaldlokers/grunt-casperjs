@@ -15,8 +15,13 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('casperjs', 'Run CasperJs tests.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var done = this.async(),
-        filepaths = [], 
-        options = grunt.util._.defaults(this.options(), {async: {}}),
+        filepaths = [],
+        options = grunt.util._.defaults(this.options(), {
+          async: {
+            parallel: false
+          },
+          silent: false
+        }),
         asyncLoop = options.async.parallel ? 'forEach' : 'forEachSeries';
 
     // Get rid of the async options since they're unrelated to casper/phantom
