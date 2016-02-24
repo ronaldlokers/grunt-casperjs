@@ -1,4 +1,3 @@
-var casper = require('casper').create();
 
 casper.start('http://www.google.nl/', function() {
     this.test.assertEquals(casper.cli.get('foo'), 'bar', "options were passed in successfully")
@@ -15,6 +14,10 @@ casper.then(function() {
     this.test.assertEval(function() {
         return __utils__.findAll('h3.r').length >= 10;
     }, 'google search for "foo" retrieves 10 or more results');
+});
+
+casper.then(function () {
+    this.test.done();
 });
 
 casper.run(function() {
