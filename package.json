@@ -1,5 +1,5 @@
 {
-  "name": "grunt-casperjs",
+  "name": "@ndelangen/grunt-casperjs",
   "description": "With this grunt.js task you can run tests with CasperJS.",
   "version": "3.0.0",
   "homepage": "https://github.com/ndelangen/grunt-casperjs",
