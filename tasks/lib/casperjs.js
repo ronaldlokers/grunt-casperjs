@@ -18,7 +18,7 @@ exports.init = function(grunt) {
     }
     var args = ['test'],
         spawn = require('child_process').spawn,
-        phantomBinPath = require('phantomjs').path;
+        phantomBinPath = require('phantomjs-prebuilt').path;
 
     if (options.casperjsOptions && options.casperjsOptions.length > 0) {
         args = args.concat(options.casperjsOptions);
