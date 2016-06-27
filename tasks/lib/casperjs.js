@@ -6,7 +6,7 @@ exports.init = function(grunt) {
 
   exports.casperjs = function(filepath, options, callback) {
 
-    var command = "./node_modules/.bin/casperjs";
+    var command = "./node_modules/casperjs/bin/casperjs";
     if (!fs.existsSync(command)) {
       command = path.join(__dirname, '..', '..', 'node_modules', '.bin', 'casperjs');
       if (!fs.existsSync(command)) {
@@ -14,7 +14,7 @@ exports.init = function(grunt) {
       }
     }
     if (process.platform === 'win32') {
-      command += ".cmd";
+      command += ".exe";
     }
     var args = ['test'],
         spawn = require('child_process').spawn,
