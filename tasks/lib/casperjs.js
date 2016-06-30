@@ -4,7 +4,7 @@ var fs = require('fs');
 exports.init = function(grunt) {
   var exports = {};
 
-  exports.casperjs = function(filepath, options, callback) {
+  exports.casperjs = function(filepath, options, callback, index) {
 
     var command = "./node_modules/casperjs/bin/casperjs";
     if (!fs.existsSync(command)) {
@@ -20,8 +20,17 @@ exports.init = function(grunt) {
         spawn = require('child_process').spawn,
         phantomBinPath = require('phantomjs-prebuilt').path;
 
-    if (options.casperjsOptions && options.casperjsOptions.length > 0) {
-        args = args.concat(options.casperjsOptions);
+    // Check for xunit and make result files unique
+    var casperjsOptionsCopy = options.casperjsOptions.slice(0);
+    if (casperjsOptionsCopy && casperjsOptionsCopy.length > 0) {
+        if (index) {
+          for (var i = 0; i < casperjsOptionsCopy.length; i++) {
+            if (casperjsOptionsCopy[i].match(/xunit/)) {
+              casperjsOptionsCopy[i] = casperjsOptionsCopy[i].replace('.xml','-'+index+'.xml');
+            }
+          }
+        }
+        args = args.concat(casperjsOptionsCopy);
     }
 
     args.push(filepath);
